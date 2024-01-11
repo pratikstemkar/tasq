@@ -1,3 +1,3 @@
 # TasQ
 
-Real-Time Task Management for your team.
+Real-Time Collaborative Task Management for your team.
