@@ -7,6 +7,8 @@ import { ThemeProvider } from "@/components/layout/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
     title: `${process.env.NEXT_PUBLIC_APP_NAME} | Manage your tasks with ease`,
     description: "Real-Time Collaborative Task Management for your team.",
