@@ -1,3 +1,4 @@
+import CardPage from "@/components/dashboard/CardPage";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ const Dashboard = () => {
                     Manage your tasks and updates from here.
                 </h2>
             </div>
-            <div>Cards</div>
+            <CardPage />
         </main>
     );
 };

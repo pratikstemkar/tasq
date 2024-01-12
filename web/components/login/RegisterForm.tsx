@@ -26,6 +26,8 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { Icons } from "../ui/icons";
+import { useAuth } from "@/lib/hooks";
+import { redirect } from "next/navigation";
 
 const formSchema = z.object({
     email: z.string().min(2).max(50).email(),
@@ -33,6 +35,12 @@ const formSchema = z.object({
 });
 
 const RegisterForm = () => {
+    const auth = useAuth();
+
+    if (auth.user) {
+        redirect("/dashboard");
+    }
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {

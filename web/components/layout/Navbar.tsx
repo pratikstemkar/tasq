@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
@@ -12,8 +14,29 @@ import {
 import { AlignJustifyIcon, LogIn, SparklesIcon } from "lucide-react";
 import ThemeMenu from "./ThemeMenu";
 import UserNav from "./UserNav";
+import { useAppDispatch, useAuth } from "@/lib/hooks";
+import { useEffect } from "react";
+import { logout, setCredentials } from "@/lib/features/authSlice";
 
 const Navbar = () => {
+    const auth = useAuth();
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        if (localStorage.getItem("token")) {
+            console.log("token found in localstorage");
+            dispatch(
+                setCredentials({
+                    user: JSON.parse(localStorage.getItem("user")!),
+                    token: localStorage.getItem("token"),
+                })
+            );
+        } else {
+            console.log("token not found");
+            dispatch(logout());
+        }
+    }, []);
+
     return (
         <nav className="flex justify-between items-center px-5 lg:px-20 py-2 backdrop-blur-lg">
             <div>
@@ -34,57 +57,64 @@ const Navbar = () => {
                 </Link>
             </div>
             <div className="space-x-2 flex justify-center items-center">
-                <Link
-                    href="/login"
-                    className="hidden lg:inline-flex"
-                >
-                    <Button variant="outline">
-                        <LogIn className="mr-2 h-4 w-4" />
-                        <span>Sign In</span>
-                    </Button>
-                </Link>
-                <Link
-                    href="register"
-                    className="hidden lg:inline-flex"
-                >
-                    <Button variant="default">
-                        <span>Join Now</span>
-                    </Button>
-                </Link>
-                <Link
-                    href="/upgrade"
-                    className="hidden lg:inline-flex"
-                >
-                    <Button
-                        variant="outline"
-                        className="rounded-full"
-                    >
-                        <SparklesIcon className="mr-2 h-4 w-4" />
-                        <span>Upgrade</span>
-                    </Button>
-                </Link>
-                <UserNav />
-                <ThemeToggle />
-                <DropdownMenu>
-                    <DropdownMenuTrigger>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            className="lg:hidden"
+                {!auth.user ? (
+                    <>
+                        <Link
+                            href="/login"
+                            className="hidden lg:inline-flex"
                         >
-                            <AlignJustifyIcon className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        <ThemeMenu />
-                        <Link href="/login">
-                            <DropdownMenuItem>
+                            <Button variant="outline">
                                 <LogIn className="mr-2 h-4 w-4" />
                                 <span>Sign In</span>
-                            </DropdownMenuItem>
+                            </Button>
                         </Link>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                        <Link
+                            href="register"
+                            className="hidden lg:inline-flex"
+                        >
+                            <Button variant="default">
+                                <span>Join Now</span>
+                            </Button>
+                        </Link>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger>
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="lg:hidden"
+                                >
+                                    <AlignJustifyIcon className="h-4 w-4" />
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                                <ThemeMenu />
+                                <Link href="/login">
+                                    <DropdownMenuItem>
+                                        <LogIn className="mr-2 h-4 w-4" />
+                                        <span>Sign In</span>
+                                    </DropdownMenuItem>
+                                </Link>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </>
+                ) : (
+                    <>
+                        <Link
+                            href="/upgrade"
+                            className="hidden lg:inline-flex"
+                        >
+                            <Button
+                                variant="outline"
+                                className="rounded-full"
+                            >
+                                <SparklesIcon className="mr-2 h-4 w-4" />
+                                <span>Upgrade</span>
+                            </Button>
+                        </Link>
+                        <UserNav />
+                    </>
+                )}
+                <ThemeToggle />
             </div>
         </nav>
     );

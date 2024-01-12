@@ -17,9 +17,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/lib/hooks";
+import { logout } from "@/lib/features/authSlice";
 
 const UserNav = () => {
     const router = useRouter();
+    const dispatch = useAppDispatch();
 
     return (
         <DropdownMenu>
@@ -40,7 +43,7 @@ const UserNav = () => {
             <DropdownMenuContent>
                 <DropdownMenuGroup>
                     <DropdownMenuItem
-                        className="cursor-pointer"
+                        className="cursor-pointer lg:hidden"
                         onClick={() => router.push("/upgrade")}
                     >
                         <SparklesIcon className="mr-2 h-4 w-4" />
@@ -60,7 +63,10 @@ const UserNav = () => {
                         <SettingsIcon className="mr-2 h-4 w-4" />
                         <span>Settings</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="text-red-500 cursor-pointer">
+                    <DropdownMenuItem
+                        className="text-red-500 cursor-pointer"
+                        onClick={() => dispatch(logout())}
+                    >
                         <LogOut className="mr-2 h-4 w-4" />
                         <span>Sign Out</span>
                     </DropdownMenuItem>

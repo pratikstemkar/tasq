@@ -24,6 +24,9 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
+import { useAppDispatch, useAuth } from "@/lib/hooks";
+import { setCredentials } from "@/lib/features/authSlice";
+import { redirect, useRouter } from "next/navigation";
 
 const loginFormSchema = z.object({
     identity: z.string().min(2).max(50),
@@ -31,6 +34,14 @@ const loginFormSchema = z.object({
 });
 
 const LoginForm = () => {
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+    const auth = useAuth();
+
+    if (auth.user) {
+        redirect("/dashboard");
+    }
+
     const form = useForm<z.infer<typeof loginFormSchema>>({
         resolver: zodResolver(loginFormSchema),
         defaultValues: {
@@ -41,6 +52,19 @@ const LoginForm = () => {
 
     function onSubmit(values: z.infer<typeof loginFormSchema>) {
         console.log(values);
+        dispatch(
+            setCredentials({
+                user: {
+                    id: "1234",
+                    avatar: "https://github.com/pratikstemkar.png",
+                    email: "pratikstemkar@gmail.com",
+                    username: "pratikstemkar",
+                    roles: ["user"],
+                },
+                token: "hehehehe",
+            })
+        );
+        router.push("/dashboard");
     }
 
     return (

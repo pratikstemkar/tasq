@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
+import StoreProvider from "@/components/layout/StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,25 +26,27 @@ export default function RootLayout({
             lang="en"
             suppressHydrationWarning
         >
-            <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-            >
-                <body
-                    className={`${inter.className} flex flex-col justify-between min-h-screen`}
+            <StoreProvider>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
                 >
-                    <div>
-                        <Navbar />
-                        {children}
-                    </div>
-                    <div>
-                        <Toaster />
-                        <Footer />
-                    </div>
-                </body>
-            </ThemeProvider>
+                    <body
+                        className={`${inter.className} flex flex-col justify-between min-h-screen`}
+                    >
+                        <div>
+                            <Navbar />
+                            {children}
+                        </div>
+                        <div>
+                            <Toaster />
+                            <Footer />
+                        </div>
+                    </body>
+                </ThemeProvider>
+            </StoreProvider>
         </html>
     );
 }
