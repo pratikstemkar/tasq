@@ -9,8 +9,9 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AlignJustifyIcon, LogIn, Sparkles } from "lucide-react";
+import { AlignJustifyIcon, LogIn } from "lucide-react";
 import ThemeMenu from "./ThemeMenu";
+import UserNav from "./UserNav";
 
 const Navbar = () => {
     return (
@@ -50,6 +51,7 @@ const Navbar = () => {
                         <span>Join Now</span>
                     </Button>
                 </Link>
+                <UserNav />
                 <ThemeToggle />
                 <DropdownMenu>
                     <DropdownMenuTrigger>
