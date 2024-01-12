@@ -7,12 +7,12 @@ export const metadata: Metadata = {
 
 const Dashboard = () => {
     return (
-        <main className="flex flex-col space-y-5 max-w-7xl justify-center mx-auto py-10 px-5 lg:px-0 ">
+        <main className="flex flex-col space-y-10 max-w-7xl justify-center mx-auto py-5 lg:py-10 px-5 lg:px-0 ">
             <div className="flex flex-col w-full">
                 <h1 className="text-4xl font-bold tracking-tighter">
                     Welcome back, Pratik!
                 </h1>
-                <h2 className="text-md text-slate-600 font-medium">
+                <h2 className="text-md text-muted-foreground font-medium">
                     Manage your tasks and updates from here.
                 </h2>
             </div>

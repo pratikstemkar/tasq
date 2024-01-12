@@ -1,13 +1,17 @@
-import { Metadata } from "next";
+import { ProfileForm } from "@/components/settings/ProfileForm";
+import { Separator } from "@/components/ui/separator";
 
-export const metadata: Metadata = {
-    title: `${process.env.NEXT_PUBLIC_APP_NAME} | Settings`,
-    description:
-        "Manage your account settings and set notification preferences.",
-};
-
-const Settings = () => {
-    return <div>Settings</div>;
-};
-
-export default Settings;
+export default function SettingsProfilePage() {
+    return (
+        <div className="space-y-6">
+            <div>
+                <h3 className="text-lg font-medium">Profile</h3>
+                <p className="text-sm text-muted-foreground">
+                    This is how others will see you on the site.
+                </p>
+            </div>
+            <Separator />
+            <ProfileForm />
+        </div>
+    );
+}

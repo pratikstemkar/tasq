@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 
 const Upgrade = () => {
     return (
-        <main className="flex flex-col-reverse lg:flex-row max-w-7xl justify-center items-center mx-auto py-10 px-5 lg:px-0">
+        <main className="flex flex-col-reverse lg:flex-row max-w-7xl justify-center items-center mx-auto py-5 lg:py-10 px-5 lg:px-0">
             <div className="lg:w-1/2 space-y-5 mt-5 lg:mt-0">
                 <h1 className="font-extrabold text-7xl tracking-tighter">
                     Be part of the exclusive club!
                 </h1>
-                <p className="text-md text-slate-700">
+                <p className="text-md text-muted-foreground">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Quae blanditiis voluptatum, perspiciatis corporis iusto
                     delectus deserunt earum illo laborum consequatur ipsam
