@@ -64,7 +64,7 @@ const LoginForm = () => {
                 token: "hehehehe",
             })
         );
-        router.push("/dashboard");
+        redirect("/dashboard");
     }
 
     return (
