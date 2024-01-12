@@ -1,5 +1,12 @@
+"use client";
+
 import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
-import { ListPlus, LogOut, Sparkles, User } from "lucide-react";
+import {
+    LayoutDashboardIcon,
+    LogOut,
+    SettingsIcon,
+    SparklesIcon,
+} from "lucide-react";
 
 import {
     DropdownMenu,
@@ -9,8 +16,11 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 const UserNav = () => {
+    const router = useRouter();
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -29,17 +39,26 @@ const UserNav = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuGroup>
-                    <DropdownMenuItem className="cursor-pointer text-yellow-500 lg:hidden">
-                        <Sparkles className="mr-2 h-4 w-4" />
-                        <span>Subscribe</span>
+                    <DropdownMenuItem
+                        className="cursor-pointer"
+                        onClick={() => router.push("/upgrade")}
+                    >
+                        <SparklesIcon className="mr-2 h-4 w-4" />
+                        <span>Upgrade</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="cursor-pointer">
-                        <User className="mr-2 h-4 w-4" />
-                        <span>Profile</span>
+                    <DropdownMenuItem
+                        className="cursor-pointer"
+                        onClick={() => router.push("/dashboard")}
+                    >
+                        <LayoutDashboardIcon className="mr-2 h-4 w-4" />
+                        <span>Dashboard</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="cursor-pointer">
-                        <ListPlus className="mr-2 h-4 w-4" />
-                        <span>Watchlist</span>
+                    <DropdownMenuItem
+                        className="cursor-pointer"
+                        onClick={() => router.push("/settings")}
+                    >
+                        <SettingsIcon className="mr-2 h-4 w-4" />
+                        <span>Settings</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="text-red-500 cursor-pointer">
                         <LogOut className="mr-2 h-4 w-4" />

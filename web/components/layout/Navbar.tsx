@@ -9,7 +9,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AlignJustifyIcon, LogIn } from "lucide-react";
+import { AlignJustifyIcon, LogIn, SparklesIcon } from "lucide-react";
 import ThemeMenu from "./ThemeMenu";
 import UserNav from "./UserNav";
 
@@ -49,6 +49,18 @@ const Navbar = () => {
                 >
                     <Button variant="default">
                         <span>Join Now</span>
+                    </Button>
+                </Link>
+                <Link
+                    href="/upgrade"
+                    className="hidden lg:inline-flex"
+                >
+                    <Button
+                        variant="outline"
+                        className="rounded-full"
+                    >
+                        <SparklesIcon className="mr-2 h-4 w-4" />
+                        <span>Upgrade</span>
                     </Button>
                 </Link>
                 <UserNav />
