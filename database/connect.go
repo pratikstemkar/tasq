@@ -3,6 +3,7 @@ package database
 import (
 	"fmt"
 	"os"
+	"strconv"
 
 	_ "github.com/lib/pq"
 	"gorm.io/driver/postgres"
@@ -12,6 +13,7 @@ import (
 var (
 	DB_HOST     = os.Getenv("DB_HOST")
 	DB_USER     = os.Getenv("DB_USER")
+	DB_PORT, _  = strconv.Atoi(os.Getenv("DB_PORT"))
 	DB_PASSWORD = os.Getenv("DB_PASSWORD")
 	DB_DATABASE = os.Getenv("DB_DATABASE")
 )
@@ -19,14 +21,8 @@ var (
 func ConnectDB() {
 	var err error
 
-	connStr := fmt.Sprintf(
-		"postgres://%s:%s@%s/%s?sslmode=require",
-		DB_USER,
-		DB_PASSWORD,
-		DB_HOST,
-		DB_DATABASE,
-	)
-	DB, err := gorm.Open(postgres.Open(connStr), &gorm.Config{})
+	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE)
+	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
