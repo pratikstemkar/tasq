@@ -9,8 +9,8 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	_ "github.com/joho/godotenv/autoload"
 
-	"github.com/pratikstemkar/tusq/database"
-	"github.com/pratikstemkar/tusq/router"
+	"github.com/pratikstemkar/tusq/internal/database"
+	"github.com/pratikstemkar/tusq/internal/router"
 )
 
 func main() {

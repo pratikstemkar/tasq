@@ -4,7 +4,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 
-	"github.com/pratikstemkar/tusq/handler"
+	"github.com/pratikstemkar/tusq/internal/handler"
 )
 
 func SetupRoutes(app *fiber.App) {
@@ -12,4 +12,5 @@ func SetupRoutes(app *fiber.App) {
 
 	v1 := api.Group("/v1")
 	v1.Get("/", handler.HelloHandler)
+
 }

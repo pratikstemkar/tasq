@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	_ "github.com/lib/pq"
+	"github.com/pratikstemkar/tusq/internal/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -28,6 +29,6 @@ func ConnectDB() {
 	}
 
 	fmt.Println("DB Connection Opened.")
-	DB.AutoMigrate()
+	DB.AutoMigrate(&model.User{}, &model.Role{})
 	fmt.Println("Database Auto Migration Successful.")
 }
