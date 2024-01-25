@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { redirect, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { useAuth } from "@/lib/hooks";
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
     items: {
@@ -16,11 +15,6 @@ interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
 
 export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
     const pathname = usePathname();
-    const auth = useAuth();
-
-    if (!auth.user) {
-        redirect("/login");
-    }
 
     return (
         <nav

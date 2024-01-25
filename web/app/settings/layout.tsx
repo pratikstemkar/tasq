@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: `${process.env.NEXT_PUBLIC_APP_NAME} | Settings`,
+    title: `Settings`,
     description:
         "Manage your account settings and set notification preferences.",
 };

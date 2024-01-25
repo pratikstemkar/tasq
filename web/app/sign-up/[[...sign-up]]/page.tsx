@@ -1,29 +1,27 @@
-import LoginForm from "@/components/login/LoginForm";
+import { SignUp } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-    title: `${process.env.NEXT_PUBLIC_APP_NAME} | Sign In`,
-    description: "Sign In to your TasQ account.",
+    title: `Sign Up`,
+    description: "Create a new TusQ account.",
 };
 
-const Login = () => {
+export default function Page() {
     return (
         <main className="flex max-w-7xl justify-center items-center mx-auto py-10 px-5 lg:px-0">
-            <div className="lg:w-1/2 flex">
-                <LoginForm />
-            </div>
-            <div className="w-1/2 hidden lg:block lg:flex-row-reverse">
+            <div className="w-1/2 hidden lg:block">
                 <Image
-                    src="/login.jpg"
+                    src="/register.jpg"
                     width={1000}
                     height={500}
                     alt="demo"
                     className="rounded-lg"
                 />
             </div>
+            <div className="lg:w-1/2 flex lg:flex-row-reverse">
+                <SignUp />
+            </div>
         </main>
     );
-};
-
-export default Login;
+}

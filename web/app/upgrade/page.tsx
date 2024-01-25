@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: `${process.env.NEXT_PUBLIC_APP_NAME} | Upgrade`,
+    title: `Upgrade`,
     description: "Upgrade your account to unlock exclusive privileges.",
 };
 

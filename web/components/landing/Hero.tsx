@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { useAuth } from "@/lib/hooks";
+import { useAuth } from "@clerk/nextjs";
 
 const Hero = () => {
-    const auth = useAuth();
+    const { isLoaded, userId, sessionId, getToken } = useAuth();
 
     return (
         <div className="w-full flex flex-col items-center justify-center">
@@ -18,9 +18,9 @@ const Hero = () => {
                 synchronized teamwork &mdash; where tasks meet real-time
                 collaboration effortlessly
             </p>
-            <Link href="/register">
+            <Link href={userId ? "/dashboard" : "/sign-up"}>
                 <Button className="group transition duration-300 hover:scale-105">
-                    {auth.user ? (
+                    {userId ? (
                         <span>Go to Dashboard</span>
                     ) : (
                         <span>Join Now</span>

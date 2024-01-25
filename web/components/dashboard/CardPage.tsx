@@ -1,13 +1,12 @@
 "use client";
 
-import { useAuth } from "@/lib/hooks";
-import { redirect } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 const CardPage = () => {
-    const auth = useAuth();
+    const { isLoaded, isSignedIn, user } = useUser();
 
-    if (!auth.user) {
-        redirect("/login");
+    if (!isLoaded || !isSignedIn) {
+        return null;
     }
 
     return <div>CardPage</div>;

@@ -13,29 +13,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { AlignJustifyIcon, LogIn, SparklesIcon } from "lucide-react";
 import ThemeMenu from "./ThemeMenu";
-import UserNav from "./UserNav";
-import { useAppDispatch, useAuth } from "@/lib/hooks";
-import { useEffect } from "react";
-import { logout, setCredentials } from "@/lib/features/authSlice";
+import { UserButton } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
 
 const Navbar = () => {
-    const auth = useAuth();
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        if (localStorage.getItem("token")) {
-            console.log("token found in localstorage");
-            dispatch(
-                setCredentials({
-                    user: JSON.parse(localStorage.getItem("user")!),
-                    token: localStorage.getItem("token"),
-                })
-            );
-        } else {
-            console.log("token not found");
-            dispatch(logout());
-        }
-    }, []);
+    const { isLoaded, userId, sessionId, getToken } = useAuth();
 
     return (
         <nav className="flex justify-between items-center px-5 lg:px-20 py-2 backdrop-blur-lg">
@@ -57,10 +39,10 @@ const Navbar = () => {
                 </Link>
             </div>
             <div className="space-x-2 flex justify-center items-center">
-                {!auth.user ? (
+                {!userId ? (
                     <>
                         <Link
-                            href="/login"
+                            href="/sign-in"
                             className="hidden lg:inline-flex"
                         >
                             <Button variant="outline">
@@ -69,7 +51,7 @@ const Navbar = () => {
                             </Button>
                         </Link>
                         <Link
-                            href="register"
+                            href="/sign-up"
                             className="hidden lg:inline-flex"
                         >
                             <Button variant="default">
@@ -88,7 +70,7 @@ const Navbar = () => {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
                                 <ThemeMenu />
-                                <Link href="/login">
+                                <Link href="/sign-in">
                                     <DropdownMenuItem>
                                         <LogIn className="mr-2 h-4 w-4" />
                                         <span>Sign In</span>
@@ -111,7 +93,7 @@ const Navbar = () => {
                                 <span>Upgrade</span>
                             </Button>
                         </Link>
-                        <UserNav />
+                        <UserButton afterSignOutUrl="/" />
                     </>
                 )}
                 <ThemeToggle />
