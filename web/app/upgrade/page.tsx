@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { SparklesIcon } from "lucide-react";
 import Image from "next/image";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
     title: `Upgrade`,
@@ -22,13 +23,15 @@ const Upgrade = () => {
                     laudantium facilis ullam iste iure cumque totam fugit
                     voluptatibus.
                 </p>
-                <Button
-                    variant="outline"
-                    className="rounded-full"
-                >
-                    <SparklesIcon className="mr-2 h-4 w-4" />
-                    <span>Upgrade</span>
-                </Button>
+                <Link href={`${process.env.STRIPE_PAYMENT_LINK}`}>
+                    <Button
+                        variant="outline"
+                        className="rounded-full mt-5"
+                    >
+                        <SparklesIcon className="mr-2 h-4 w-4" />
+                        <span>Upgrade</span>
+                    </Button>
+                </Link>
             </div>
             <div className="lg:w-1/2">
                 <Image
