@@ -1,24 +1,38 @@
 package handler
 
 import (
+	"fmt"
+	"os"
+
+	"github.com/clerkinc/clerk-sdk-go/clerk"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
+	_ "github.com/joho/godotenv/autoload"
+
 	"github.com/pratikstemkar/tusq/internal/database"
 	"github.com/pratikstemkar/tusq/internal/model"
 	"github.com/pratikstemkar/tusq/internal/util"
 )
 
 func GetUsers(c *fiber.Ctx) error {
-	db := database.DB
-	var users []model.User
-	res := db.Find(&users)
-	if res.RowsAffected == 0 {
-		c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"status":  "error",
-			"message": "Users not found.",
-			"data":    res.Error,
-		})
+	client, err := clerk.NewClient(os.Getenv("CLERK_SECRET_KEY"))
+	if err != nil {
+		fmt.Println(err)
 	}
+	users, err := client.Users().ListAll(clerk.ListAllUsersParams{})
+	if err != nil {
+		panic(err)
+	}
+	// db := database.DB
+	// var users []model.User
+	// res := db.Find(&users)
+	// if res.RowsAffected == 0 {
+	// 	c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+	// 		"status":  "error",
+	// 		"message": "Users not found.",
+	// 		"data":    res.Error,
+	// 	})
+	// }
 	return c.JSON(fiber.Map{
 		"status":  "success",
 		"message": "Users Found.",
@@ -28,16 +42,24 @@ func GetUsers(c *fiber.Ctx) error {
 
 func GetUser(c *fiber.Ctx) error {
 	id := c.Params("id")
-	db := database.DB
-	var user model.User
-	db.Preload("Roles").Find(&user, id)
-	if user.Email == "" {
-		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"status":  "error",
-			"message": "No User found with ID",
-			"data":    nil,
-		})
+	client, err := clerk.NewClient(os.Getenv("CLERK_SECRET_KEY"))
+	if err != nil {
+		panic(err)
 	}
+	user, err := client.Users().Read(id)
+	if err != nil {
+		panic(err)
+	}
+	// db := database.DB
+	// var user model.User
+	// db.Preload("Roles").Find(&user, id)
+	// if user.Email == "" {
+	// 	return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+	// 		"status":  "error",
+	// 		"message": "No User found with ID",
+	// 		"data":    nil,
+	// 	})
+	// }
 	return c.JSON(fiber.Map{
 		"status":  "success",
 		"message": "User Found",
