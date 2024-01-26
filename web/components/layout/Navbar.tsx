@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { ThemeToggle } from "./ThemeToggle";
 
 import {
     DropdownMenu,
@@ -11,7 +10,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AlignJustifyIcon, LogIn, SparklesIcon } from "lucide-react";
+import { AlignJustifyIcon, LogIn } from "lucide-react";
 import ThemeMenu from "./ThemeMenu";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import { useAuth } from "@clerk/nextjs";
@@ -109,7 +108,6 @@ const Navbar = () => {
                         />
                     </>
                 )}
-                {/* <ThemeToggle /> */}
             </div>
         </nav>
     );

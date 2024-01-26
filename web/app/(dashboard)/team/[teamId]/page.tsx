@@ -1,8 +1,12 @@
-import { auth } from "@clerk/nextjs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Dashboard",
+    description: "Real-Time Collaborative Task Management for your team.",
+};
 
 const TeamPage = () => {
-    const { userId, orgId } = auth();
-    return <div>Team: {orgId}</div>;
+    return <div>Team</div>;
 };
 
 export default TeamPage;

@@ -1,12 +1,20 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
+import { Skeleton } from "../ui/skeleton";
 
 const WelcomeCard = () => {
     const { isLoaded, isSignedIn, user } = useUser();
 
     if (!isLoaded || !isSignedIn) {
-        return null;
+        return (
+            <>
+                <div className="flex flex-col space-y-2">
+                    <Skeleton className="h-10 w-1/2" />
+                    <Skeleton className="h-5 w-1/4" />
+                </div>
+            </>
+        );
     }
 
     return (
