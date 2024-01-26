@@ -1,12 +1,7 @@
-"use client";
-
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { useAuth } from "@clerk/nextjs";
 
 const Hero = () => {
-    const { isLoaded, userId, sessionId, getToken } = useAuth();
-
     return (
         <div className="w-full flex flex-col items-center justify-center">
             <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
@@ -18,13 +13,9 @@ const Hero = () => {
                 synchronized teamwork &mdash; where tasks meet real-time
                 collaboration effortlessly
             </p>
-            <Link href={userId ? "/dashboard" : "/sign-up"}>
+            <Link href="/sign-up">
                 <Button className="group transition duration-300 hover:scale-105">
-                    {userId ? (
-                        <span>Go to Dashboard</span>
-                    ) : (
-                        <span>Join Now</span>
-                    )}
+                    <span>Join Now</span>
                     <svg
                         className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
                         aria-hidden="true"

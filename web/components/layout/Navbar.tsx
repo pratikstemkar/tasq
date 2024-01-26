@@ -13,14 +13,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { AlignJustifyIcon, LogIn, SparklesIcon } from "lucide-react";
 import ThemeMenu from "./ThemeMenu";
-import { UserButton } from "@clerk/nextjs";
+import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import { useAuth } from "@clerk/nextjs";
 
 const Navbar = () => {
     const { isLoaded, userId, sessionId, getToken } = useAuth();
 
     return (
-        <nav className="flex justify-between items-center px-5 lg:px-20 py-2 backdrop-blur-lg">
+        <nav className="flex justify-between items-center px-5 lg:px-20 py-2 backdrop-blur-lg bg-red-500">
             <div>
                 <Link
                     href="/"
@@ -81,22 +81,35 @@ const Navbar = () => {
                     </>
                 ) : (
                     <>
-                        <Link
-                            href="/upgrade"
-                            className="hidden lg:inline-flex"
-                        >
-                            <Button
-                                variant="outline"
-                                className="rounded-full"
-                            >
-                                <SparklesIcon className="mr-2 h-4 w-4" />
-                                <span>Upgrade</span>
-                            </Button>
-                        </Link>
-                        <UserButton afterSignOutUrl="/" />
+                        <OrganizationSwitcher
+                            hidePersonal
+                            afterCreateOrganizationUrl="/team/:id"
+                            afterSelectOrganizationUrl="/team/:id"
+                            afterLeaveOrganizationUrl="/select-org"
+                            appearance={{
+                                elements: {
+                                    rootBox: {
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                    },
+                                },
+                            }}
+                        />
+                        <UserButton
+                            afterSignOutUrl="/"
+                            appearance={{
+                                elements: {
+                                    avatarBox: {
+                                        height: 30,
+                                        width: 30,
+                                    },
+                                },
+                            }}
+                        />
                     </>
                 )}
-                <ThemeToggle />
+                {/* <ThemeToggle /> */}
             </div>
         </nav>
     );
