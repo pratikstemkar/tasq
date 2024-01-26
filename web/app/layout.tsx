@@ -46,10 +46,10 @@ export default function RootLayout({
                                 <Navbar />
                                 {children}
                             </div>
-                            <div>
+                            <>
                                 <Toaster />
                                 <Footer />
-                            </div>
+                            </>
                         </body>
                     </ThemeProvider>
                 </ClerkProvider>

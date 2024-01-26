@@ -20,7 +20,7 @@ const Navbar = () => {
     const { isLoaded, userId, sessionId, getToken } = useAuth();
 
     return (
-        <nav className="flex justify-between items-center px-5 lg:px-20 py-2 backdrop-blur-lg bg-red-500">
+        <nav className="flex justify-between items-center px-5 lg:px-20 py-1.5 backdrop-blur-lg shadow-sm">
             <div>
                 <Link
                     href="/"
