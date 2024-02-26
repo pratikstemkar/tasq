@@ -1,3 +1,4 @@
+import BlockList from "@/components/dashboard/BlockList";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 const TeamPage = () => {
-    return <div>Team</div>;
+    return <BlockList />;
 };
 
 export default TeamPage;
